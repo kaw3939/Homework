@@ -46,6 +46,12 @@ $a->setBody('body');
 
 echo '<h1>' . $a->getTitle() . '</h1>';
 echo '<p>' . $a->getBody() . '</p>';
+$filename = 'js/myscript.js';
 
+if (file_exists($filename)) {
+    echo "The file $filename exists";
+} else {
+    echo "The file $filename does not exist";
+}
 
 ?>
