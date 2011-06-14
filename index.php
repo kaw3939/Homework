@@ -1,57 +1,58 @@
-<?php
-//interface for web page
-/*
-interface webpage {
-	function setHeader($pageType);
-	function setJquery($jquery);
-	function setCSS($css);
-	function getHeader();
-	function getJquery();
-	function getCSS();
-}
-*/
-//Interface for article
-interface webpage 
-{
-	public function getTitle();
-	public function setTitle($title);
-	public function getBody();
-	public function setBody($body);
-}
-class node implements webpage
-{
-	private $title;
-	private $body;
-	
-	// sets the title of the article
-	public function setTitle($title) {
-        	$this->title = $title;
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<title>Conforming XHTML 1.0 Strict Template</title>
+
+</head>
+
+<body>
+<a href="index.php?userid=sandy&page=homepage">Sandy's Homepage</a><br>
+<a href="index.php?name=steve&page=page1">steve's data</a><br>
+<a href="http://www.google.com">Google</a>
+<?php 
+	function __autoload($class_name) {
+    	include $class_name . '.php';
 	}
 
-	// gets the title of the article 
-	public function getTitle() {
-    		return $this->title;
- 	}
-	// gets the body of the article	
-	public function getBody() {
-		return $this->body;
-	}
-	public function setBody($body) {
-		$this->body = $body;
-	}
-} 
-$a = new node();
-$a->setTitle('keith');
-$a->setBody('body');
+	$output = new request();
+	setcookie("name","data want to store as a cookie again",time()+3600);
+	echo $_COOKIE['name'];
 
-echo '<h1>' . $a->getTitle() . '</h1>';
-echo '<p>' . $a->getBody() . '</p>';
-$filename = 'js/myscript.js';
 
-if (file_exists($filename)) {
-    echo "The file $filename exists";
-} else {
-    echo "The file $filename does not exist";
-}
+	session_start(); 
+	$_SESSION['views'] = 1; // store session data
+	echo "Pageviews = ". $_SESSION['views']; //retrieve data
+		if(isset($_SESSION['views'])){
+    		$_SESSION['views'] = $_SESSION['views']+ 1;
+    		echo '<br>';}
+		else
+    		$_SESSION['views'] = 1;
+		echo "views = ". $_SESSION['views'];
+
 
 ?>
+
+<form action="index.php" method="post">
+<p>Your Name: <input type="text" name="yourname" /><br />
+E-mail: <input type="text" name="email" /></p>
+
+<p>Do you like this website?
+<input type="radio" name="likeit" value="Yes" checked="checked" /> Yes
+<input type="radio" name="likeit" value="No" /> No
+<input type="radio" name="likeit" value="Not sure" /> Not sure</p>
+
+<p>Your comments:<br />
+<textarea name="comments" rows="10" cols="40"></textarea></p>
+
+<p><input type="submit" value="Send it!"></p>
+</form>
+
+
+
+</body>
+</html>
+
